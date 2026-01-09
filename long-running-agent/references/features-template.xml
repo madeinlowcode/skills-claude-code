@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features project="[Project Name]" total="[N]" completed="[X]">
+  
+  <category name="Authentication">
+    <feature id="FEAT-001" status="complete" priority="high" session="2">
+      <description>User can create account</description>
+      <steps>
+        <step>Navigate to registration page</step>
+        <step>Fill form with valid data</step>
+        <step>Submit and verify account created</step>
+        <step>Receive confirmation email</step>
+      </steps>
+      <notes>Implemented with JWT tokens</notes>
+    </feature>
+    
+    <feature id="FEAT-002" status="pending" priority="high">
+      <description>User can login</description>
+      <steps>
+        <step>Navigate to login page</step>
+        <step>Enter credentials</step>
+        <step>Verify redirect to dashboard</step>
+        <step>Verify session persists</step>
+      </steps>
+    </feature>
+    
+    <feature id="FEAT-003" status="blocked" priority="medium">
+      <description>User can reset password</description>
+      <steps>
+        <step>Click forgot password</step>
+        <step>Enter email</step>
+        <step>Receive reset link</step>
+        <step>Set new password</step>
+      </steps>
+      <notes>Blocked: Email service not configured</notes>
+    </feature>
+  </category>
+  
+  <category name="Core Features">
+    <feature id="FEAT-010" status="in-progress" priority="high">
+      <description>User can create new item</description>
+      <steps>
+        <step>Click create button</step>
+        <step>Fill required fields</step>
+        <step>Save and verify persistence</step>
+      </steps>
+    </feature>
+  </category>
+  
+</features>
