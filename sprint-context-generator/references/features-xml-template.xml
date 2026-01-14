@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Template de features.xml para long-running-agent
+
+  Este arquivo define features em formato XML compatível com a skill long-running-agent.
+
+  Estrutura:
+  - <features>: Elemento raiz com atributos de controle
+  - <category>: Agrupa features relacionadas
+  - <feature>: Define uma feature individual com seus steps
+
+  Atributos obrigatórios:
+  - features[@project]: Nome do projeto
+  - features[@total]: Total de features (atualizar ao adicionar novas)
+  - features[@completed]: Número de features completas (atualizar quando completar)
+  - category[@name]: Nome da categoria
+  - feature[@id]: ID único no formato FEAT-XXX (3 dígitos)
+  - feature[@status]: pending | in-progress | complete | blocked
+  - feature[@priority]: high | medium | low
+
+  Validação:
+  Execute: python scripts/validate-compatibility.py features.xml
+-->
+
+<features project="Nome do Projeto" total="3" completed="0">
+
+  <!--
+    Categoria: Agrupa features relacionadas por domínio/funcionalidade
+
+    Exemplos de categorias:
+    - Authentication
+    - Dashboard
+    - API
+    - Database
+    - UI Components
+    - Payment
+    - Analytics
+  -->
+  <category name="Authentication">
+
+    <!--
+      Feature 1: Exemplo de feature com prioridade ALTA
+
+      Atributos:
+      - id: FEAT-001 (formato obrigatório: FEAT-XXX com 3 dígitos)
+      - status: pending (não iniciada)
+      - priority: high (alta prioridade)
+
+      Subelementos:
+      - <description>: Descrição clara da feature
+      - <steps>: Lista de critérios de aceitação (passos para completar)
+      - <notes>: Informações adicionais (referências, bloqueadores, etc.)
+    -->
+    <feature id="FEAT-001" status="pending" priority="high">
+      <description>Sistema de autenticação JWT com login, registro e reset de senha</description>
+      <steps>
+        <step>Usuário pode fazer login com email e senha</step>
+        <step>Usuário pode registrar nova conta</step>
+        <step>Usuário pode resetar senha via email</step>
+        <step>Tokens JWT são gerados e validados corretamente</step>
+        <step>Rotas protegidas requerem autenticação</step>
+        <step>Cobertura de testes E2E e unitários >90%</step>
+      </steps>
+      <notes>Tasks: 87 | Docs: docs/context-log-running/jwt-auth-system/ | Complexidade: Alta</notes>
+    </feature>
+
+    <!--
+      Feature 2: Exemplo de feature BLOQUEADA
+
+      Status: blocked
+      - Indica que esta feature não pode ser iniciada até que dependências sejam resolvidas
+      - Bloqueador deve ser descrito em <notes> com prefixo "Blocked:"
+
+      Use quando:
+      - Depende de outra feature (ex: FEAT-001)
+      - Depende de infraestrutura não disponível (ex: Redis não instalado)
+      - Depende de decisão de produto pendente
+    -->
+    <feature id="FEAT-002" status="blocked" priority="medium">
+      <description>Autenticação de dois fatores (2FA) via SMS e TOTP</description>
+      <steps>
+        <step>Usuário pode habilitar 2FA na conta</step>
+        <step>Usuário recebe código por SMS ou usa app authenticator</step>
+        <step>Login requer código 2FA quando habilitado</step>
+        <step>Códigos de backup podem ser gerados</step>
+      </steps>
+      <notes>Blocked: Requires FEAT-001 (JWT Authentication System) | Tasks: 45 | Docs: docs/context-log-running/two-factor-auth/</notes>
+    </feature>
+
+  </category>
+
+  <!--
+    Categoria: Dashboard
+
+    Exemplo de features relacionadas a UI/Dashboard
+  -->
+  <category name="Dashboard">
+
+    <!--
+      Feature 3: Exemplo de feature EM PROGRESSO
+
+      Status: in-progress
+      - Indica que o desenvolvimento está em andamento
+      - Mude para "complete" quando todos os steps forem finalizados e testes passarem
+
+      Priority: low
+      - Funcionalidade importante mas não urgente
+      - Pode ser implementada depois de features high/medium
+    -->
+    <feature id="FEAT-003" status="in-progress" priority="low">
+      <description>Dashboard de analytics com métricas de usuários e uso do sistema</description>
+      <steps>
+        <step>Dashboard exibe total de usuários ativos</step>
+        <step>Gráficos mostram tendências de uso (últimos 30 dias)</step>
+        <step>Métricas são atualizadas em tempo real</step>
+        <step>Dashboard é responsivo (mobile, tablet, desktop)</step>
+        <step>Testes E2E cobrem visualizações de dados</step>
+      </steps>
+      <notes>Tasks: 62 | Docs: docs/context-log-running/analytics-dashboard/ | Complexidade: Média | In progress since 2024-01-15</notes>
+    </feature>
+
+  </category>
+
+  <!--
+    TEMPLATE DE NOVA FEATURE
+
+    Copie e cole o bloco abaixo ao adicionar uma nova feature:
+
+    1. Incremente o ID sequencialmente (FEAT-004, FEAT-005, etc.)
+    2. Defina status apropriado (pending, in-progress, complete, blocked)
+    3. Defina prioridade (high, medium, low)
+    4. Escreva descrição clara e concisa
+    5. Liste todos os critérios de aceitação em <steps>
+    6. Adicione referências em <notes> (total de tasks, path para docs, etc.)
+    7. Se bloqueada, especifique bloqueador em <notes> com "Blocked: ..."
+    8. Atualize atributo features[@total] com novo total de features
+  -->
+
+  <!--
+  <category name="[Nome da Categoria]">
+    <feature id="FEAT-XXX" status="pending" priority="high">
+      <description>[Descrição clara da feature]</description>
+      <steps>
+        <step>[Critério de aceitação 1]</step>
+        <step>[Critério de aceitação 2]</step>
+        <step>[Critério de aceitação 3]</step>
+        <step>[Critério de aceitação N]</step>
+      </steps>
+      <notes>Tasks: [N] | Docs: docs/context-log-running/[feature-name]/ | Complexidade: [Baixa/Média/Alta]</notes>
+    </feature>
+  </category>
+  -->
+
+  <!--
+    GUIA RÁPIDO DE STATUS
+
+    pending:     Feature não iniciada, pronta para implementação
+    in-progress: Desenvolvimento em andamento
+    complete:    Feature totalmente implementada, testada e deployada
+    blocked:     Não pode ser iniciada, depende de outra feature/infraestrutura
+
+    GUIA RÁPIDO DE PRIORIDADES
+
+    high:   Crítica, deve ser implementada primeiro (bloqueador, urgente, alto valor)
+    medium: Importante mas não urgente, pode aguardar features high
+    low:    Nice to have, implementar quando tempo disponível
+
+    DICAS
+
+    1. IDs devem ser sequenciais: FEAT-001, FEAT-002, FEAT-003, ...
+    2. Nunca reutilize IDs, mesmo se feature for deletada
+    3. Mantenha features[@total] e features[@completed] atualizados
+    4. Use categorias para organizar (evite muitas features em uma categoria)
+    5. Cada <step> deve ser um critério de aceitação mensurável
+    6. Use <notes> para: total de tasks, path de docs, complexidade, bloqueadores
+    7. Valide o XML após editar: python scripts/validate-compatibility.py features.xml
+    8. Documentação completa em: docs/context-log-running/[feature-name]/
+  -->
+
+</features>
