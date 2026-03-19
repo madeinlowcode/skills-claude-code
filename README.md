@@ -217,6 +217,36 @@ Skills são pacotes modulares e auto-contidos que estendem as capacidades do Cla
 
 ### Planejamento e Gestão
 
+#### project-brain
+**Descrição:** Second Brain para Claude Code — mantém contexto completo do projeto, documentação, mapeamento de arquitetura, tracking de progresso e persistência de conhecimento usando Obsidian como vault de conhecimento.
+
+**Quando usar:**
+- Inicializar documentação completa de um projeto novo ou existente
+- Manter contexto persistente entre sessões do Claude Code
+- Mapear codebase completo (CODEBASE-MAP.json)
+- Visualizar arquitetura com Obsidian Canvas
+- Sincronizar documentação automaticamente após cada tarefa
+
+**Recursos:**
+- Integração com Obsidian MCP Server e kepano/obsidian-skills
+- CODEBASE-MAP.json para mapeamento completo do codebase
+- Templates de Canvas para visualização de arquitetura
+- STATE.md para memória cross-session
+- Suporte a metodologias BMAD, OpenSpec, GSD e SpecKit
+
+**Operações principais:**
+1. **Initialize** — Cria vault structure, templates e mapeamento inicial
+2. **Update** — Atualiza documentação após mudanças
+3. **Map Codebase** — Gera/atualiza CODEBASE-MAP.json
+4. **Sync** — Sincroniza toda documentação com estado atual
+
+**Conteúdo:**
+- `references/methodology-guide.md` — Guia de metodologias suportadas
+- `references/obsidian-integration-guide.md` — Guia de integração com Obsidian
+- `references/sync-protocol.md` — Protocolo de sincronização automática
+
+---
+
 #### software-architecture
 **Descrição:** Guia para design e análise de arquitetura de software com foco em decisões arquiteturais e trade-offs.
 
@@ -517,7 +547,7 @@ Ver arquivo LICENSE.txt em cada skill para detalhes específicos.
 
 **Última atualização:** Março 2026
 
-**Skills no repositório:** 22
+**Skills no repositório:** 23
 - fullstack-dev
 - long-running-agent
 - lisa-prompt-engineering
@@ -526,6 +556,7 @@ Ver arquivo LICENSE.txt em cada skill para detalhes específicos.
 - ffuf-skill
 - design-principles
 - design-analyzer
+- project-brain
 - software-architecture
 - software-engineer
 - skill-creator
